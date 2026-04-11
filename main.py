@@ -1,0 +1,19 @@
+from fastapi import Depends, FastAPI
+from contextlib import asynccontextmanager
+from db import engine, Base
+
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    yield
+    await engine.dispose()
+
+app = FastAPI(lifespan=lifespan)
+
+
+@app.get("/")
+async def read_root():
+    return {"message": "wsup gaaaaang!"}
