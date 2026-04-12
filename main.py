@@ -1,6 +1,7 @@
 from fastapi import Depends, FastAPI
 from contextlib import asynccontextmanager
 from db import engine, Base
+from routers import auth
 
 
 
@@ -17,3 +18,5 @@ app = FastAPI(lifespan=lifespan)
 @app.get("/")
 async def read_root():
     return {"message": "wsup gaaaaang!"}
+
+app.include_router(auth.router)

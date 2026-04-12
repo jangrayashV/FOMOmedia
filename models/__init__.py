@@ -11,7 +11,7 @@ class User(Base):
     hashed_pwd = Column(String)
     avatar = Column(String)
     bio = Column(String)
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)
 
 
 class Thread(Base):
