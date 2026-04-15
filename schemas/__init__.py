@@ -25,26 +25,26 @@ class UserUpdate(BaseModel):
     bio: Optional[str] = None
 
 
-class ThreadBase(BaseModel):
-    parent_thread_id: Optional[str] = None
+class POVBase(BaseModel):
+    parent_pov_id: Optional[int] = None
     content: str
 
-class ThreadCreate(ThreadBase):
+class POVCreate(POVBase):
     pass
 
-class ThreadRead(ThreadCreate):
-    thread_id: int
+class POVRead(POVCreate):
+    pov_id: int
     user_id: int
     created_at: datetime
 
     class Config:
         from_attributes = True
 
-class ThreadUpdate(BaseModel):
+class POVUpdate(BaseModel):
     content: Optional[str]
 
 class LikeCreate(BaseModel):
-    thread_id: int
+    pov_id: int
 
 class LikeRead(LikeCreate):
     pass

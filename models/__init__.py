@@ -14,24 +14,24 @@ class User(Base):
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)
 
 
-class Thread(Base):
-    __tablename__ = "threads"
+class POV(Base):
+    __tablename__ = "povs"
 
-    thread_id = Column(Integer, primary_key=True)
+    pov_id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("users.user_id"))
-    parent_thread_id = Column(Integer, ForeignKey("threads.thread_id"), nullable=True)
+    parent_pov_id = Column(Integer, ForeignKey("povs.pov_id"), nullable=True)
     content = Column(String, nullable=False)
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)
 
 
 class Like(Base):
     __tablename__ = "likes"
-    __table_args__ = (UniqueConstraint("user_id", "thread_id"),)
+    __table_args__ = (UniqueConstraint("user_id", "pov_id"),)
 
     liked_id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("users.user_id"))
-    thread_id = Column(Integer, ForeignKey("threads.thread_id"))
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
+    pov_id = Column(Integer, ForeignKey("povs.pov_id"))
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)
 
 
 class Follower(Base):
@@ -41,4 +41,4 @@ class Follower(Base):
 
     follower_id = Column(Integer, ForeignKey("users.user_id"), primary_key=True)
     followed_id = Column(Integer, ForeignKey("users.user_id"), primary_key=True)
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)

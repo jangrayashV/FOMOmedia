@@ -17,4 +17,4 @@ async def get_db():
     try:
         yield db_session
     finally:
-        db_session.close() 
+        await db_session.close() 

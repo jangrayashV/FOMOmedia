@@ -1,7 +1,7 @@
 from fastapi import Depends, FastAPI
 from contextlib import asynccontextmanager
 from db import engine, Base
-from routers import auth
+from routers import auth, pov
 
 
 
@@ -20,3 +20,4 @@ async def read_root():
     return {"message": "wsup gaaaaang!"}
 
 app.include_router(auth.router)
+app.include_router(pov.router)
