@@ -1,7 +1,7 @@
 from fastapi import Depends, FastAPI
 from contextlib import asynccontextmanager
 from db import engine, Base
-from routers import auth, pov, user, like
+from routers import auth, pov, user, like, follow
 
 
 
@@ -23,3 +23,4 @@ app.include_router(auth.router)
 app.include_router(user.router)
 app.include_router(pov.router)
 app.include_router(like.router)
+app.include_router(follow.router)
